@@ -1,9 +1,10 @@
 <?php
 namespace site\erick\blog;
 
-include 'artigos.php';
+require_once 'config.php';
+include 'src/artigo.php';
 
-$artigo = new Artigo();
+$artigo = new Artigo($mysql);
 $artigos = $artigo->recuperaArtigos();
 ?>
 
@@ -21,12 +22,12 @@ $artigos = $artigo->recuperaArtigos();
         <h1>Meu Blog</h1>
         <?php foreach($artigos as $artigo): // Abrindo foreach dos artigos?>
         <h2>
-            <a href="<?php echo $artigo['link']; ?>">
-                <?php echo $artigo['titulo']; ?>
-            </a>
+        <a href="artigo.php?id=<?php echo $artigo['id'];?>">
+            <?php echo $artigo['titulo']; ?>
+        </a>
         </h2>
         <p>
-            <?php echo $artigo['conteudo']; ?>
+            <?php echo nl2br($artigo['conteudo']); ?>
         </p>
         <?php endforeach; //Fechando foreach dos artigos?> 
     </div>
